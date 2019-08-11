@@ -17,5 +17,5 @@ def emergency_resources_reachable():
 def process(data):
     if emergency_resources_reachable():
         print('hi')
-        audio_ui.speak('emergency resources reachable')
+        audio_ui.speak("Ressources d'urgence disponibles")
     print('')
