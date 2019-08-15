@@ -1,23 +1,23 @@
-import speech_recognition as sr
+# This module treats audio data, it can "hear", recognize, and speak. I did none of that, I should copy paste credits one dayimport speech_recognition as sr
 import os
 from gtts import gTTS
 
 
-
 def speak(audioString):
-    print(audioString)
-    tts = gTTS(text=audioString, lang='fr')
-    tts.save("audio.mp3")
+    save_audio(audioString)
     const = "mpg321 audio.mp3"
     os.system(const)
 
-def recordAudio():
-    # Record Audio
+
+def listenToMe():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("En écoute!")
         audio = r.listen(source)
-
+    return audio
+def recordAudio():
+    r = sr.Recognizer()
+    audio = listenToMe()
     # Speech recognition using Google Speech Recognition
     data = ""
     try:
@@ -31,3 +31,7 @@ def recordAudio():
         print("Could not request results from Google Speech Recognition service; {0}".format(e))
 
     return data
+
+def save_audio(audioString):
+    tts = gTTS(text=audioString, lang='fr')
+    tts.save("audio.mp3")

@@ -1,32 +1,37 @@
-import speech_recognition as sr
-from time import ctime
+import Modules.utils as ut
 import time
-import os
-from gtts import gTTS
 from Modules.identification import username
 import Modules.emergency as emergency
 import Modules.audio_ui as audio_ui
+import Modules.IOverify as IO
 
 
+# This function is the main processing function, it treats a string, and directs it to another function
+# depending on what is in it. It does not return anything (yet)
 def file(data):
-    if "how are you" in data:
-        audio_ui.speak("I am fine")
+    data = IO.recognize_intent("Lyra", data)
+    if "comment vas-tu" in data:
+        audio_ui.speak("je vais bien, merci")
 
-    if "what time is it" in data:
-        audio_ui.speak(ctime())
+    if "quelle heure est il?" in data:
+        audio_ui.speak(ut.return_current_time())
 
     if "où est" in data:
-        data = data.split(" ")
-        location = ','.join(data[2:])
-        audio_ui.speak("Hold on " +username + ", I will show you where " + location + " is.")
-        print(location)
-        os.system("start chrome https://www.google.nl/maps/place/" + location + "/&amp;")
+        ut.find_location(data)
+
     if "mode urgence" in data:
         emergency.process(data)
+
+
 # initialization
 time.sleep(2)
 audio_ui.speak("Bonjour "+ username + ", que puis-je faire pour vous?")
 
 while 1:
     data = audio_ui.recordAudio()
-    file(data)
+    if "Lyra" in data:
+        IO.recognize_intent("Lyra", data)
+        file(data)
+    else:
+        with open("audiorec.txt", "w") as text_file:
+            print("{}".format(data), file=text_file)
