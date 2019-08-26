@@ -1,4 +1,5 @@
-# This module treats audio data, it can "hear", recognize, and speak. I did none of that, I should copy paste credits one dayimport speech_recognition as sr
+# This module treats audio data, it can "hear", recognize, and speak. I did none of that, I should copy paste credits one day
+import speech_recognition as sr
 import os
 from gtts import gTTS
 

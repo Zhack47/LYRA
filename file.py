@@ -4,12 +4,14 @@ from Modules.identification import username
 import Modules.emergency as emergency
 import Modules.audio_ui as audio_ui
 import Modules.IOverify as IO
-
+import Modules.translate as trans
 
 # This function is the main processing function, it treats a string, and directs it to another function
 # depending on what is in it. It does not return anything (yet)
+
+
 def file(data):
-    data = IO.recognize_intent("Lyra", data)
+    data = IO.treat_intent("Karen", data)
     if "comment vas-tu" in data:
         audio_ui.speak("je vais bien, merci")
 
@@ -21,16 +23,17 @@ def file(data):
 
     if "mode urgence" in data:
         emergency.process(data)
+    if "traduis" in data:
+        print(trans.from_audio_translate_to_str(data, 'fr'))
 
 
 # initialization
 time.sleep(2)
-audio_ui.speak("Bonjour "+ username + ", que puis-je faire pour vous?")
+audio_ui.speak("Bonjour " + username + ", que puis-je faire pour vous?")
 
 while 1:
     data = audio_ui.recordAudio()
-    if "Lyra" in data:
-        IO.recognize_intent("Lyra", data)
+    if "Karen" in data:
         file(data)
     else:
         with open("audiorec.txt", "w") as text_file:
