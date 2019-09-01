@@ -24,8 +24,11 @@ def file(data):
     if "mode urgence" in data:
         emergency.process(data)
     if "traduis" in data:
-        print(trans.from_audio_translate_to_str(data, 'fr'))
-
+        data = IO.treat_intent('traduis', data)
+        audio_ui.speak(trans.translate_data(data))
+    if "traduit" in data:
+        data = IO.treat_intent('traduit', data)
+        audio_ui.speak(trans.translate_data(data))
 
 # initialization
 time.sleep(2)
@@ -38,3 +41,6 @@ while 1:
     else:
         with open("audiorec.txt", "w") as text_file:
             print("{}".format(data), file=text_file)
+
+
+
