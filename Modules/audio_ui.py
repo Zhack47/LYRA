@@ -4,9 +4,10 @@ import os
 from gtts import gTTS
 
 
-def speak(audioString):
-    save_audio(audioString)
-    const = "mpg321 audio.mp3"
+def speak(audioString, lang):
+    save_audio(audioString, lang)
+    const = "mpg123 audio.mp3"
+    print(audioString)
     os.system(const)
 
 
@@ -33,6 +34,6 @@ def recordAudio():
 
     return data
 
-def save_audio(audioString):
-    tts = gTTS(text=audioString, lang='fr')
+def save_audio(audioString, lang):
+    tts = gTTS(text=audioString, lang=lang)
     tts.save("audio.mp3")

@@ -11,7 +11,7 @@ import Modules.translate as trans
 
 
 def file(data):
-    data = IO.treat_intent("Karen", data)
+    data = IO.treat_intent("Edith", data)
     if "comment vas-tu" in data:
         audio_ui.speak("je vais bien, merci")
 
@@ -23,20 +23,26 @@ def file(data):
 
     if "mode urgence" in data:
         emergency.process(data)
+
+
     if "traduis" in data:
         data = IO.treat_intent('traduis', data)
         audio_ui.speak(trans.translate_data(data))
+
+
     if "traduit" in data:
         data = IO.treat_intent('traduit', data)
-        audio_ui.speak(trans.translate_data(data))
+        res = trans.translate_data(data)
+        audio_ui.speak(res, trans.tr(res))
 
 # initialization
 time.sleep(2)
-audio_ui.speak("Bonjour " + username + ", que puis-je faire pour vous?")
+audio_ui.speak("Bonjour " + username + ", que puis-je faire pour vous?", 'fr')
 
 while 1:
     data = audio_ui.recordAudio()
-    if "Karen" in data:
+    data = data.split(" ")
+    if "Edith" in data:
         file(data)
     else:
         with open("audiorec.txt", "w") as text_file:
