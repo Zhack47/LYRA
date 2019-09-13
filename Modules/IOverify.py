@@ -3,7 +3,6 @@
 
 
 def recognize_intent(word, data): # recognizes "word" in "data"
-    data = data.split(" ")
     if word in data:
         return True
     return False
@@ -11,12 +10,10 @@ def recognize_intent(word, data): # recognizes "word" in "data"
 
 def treat_intent(word, data):  # reduces the input to only the intent (what comes after 'word')
     if recognize_intent(word, data):
-        data = data.split(" ")
         for i in range(len(data)):
             if data[i] == word:
                 intent_cut_index = i+1
                 data = data[intent_cut_index:]
-                res = "  ".join(data)
-                return res
+                return data
     print('intent error')
     return None
