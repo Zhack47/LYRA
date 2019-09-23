@@ -28,4 +28,8 @@ def acknowledge_output_language(data):
     if "en" in data:
         data = IO.treat_intent('en', data)
         return data[0]
+<<<<<<< HEAD
     return None
+=======
+    return None
+>>>>>>> d7c918f93b279ee006c0b5ed6ee777168ecc4ff2

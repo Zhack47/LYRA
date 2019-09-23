@@ -30,6 +30,7 @@ def file(data):
         audio_ui.speak(trans.translate_data(data))
 
 
+
     if "traduit" in data:
         data = IO.treat_intent('traduit', data)
         res = trans.translate_data(data)
