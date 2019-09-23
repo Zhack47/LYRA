@@ -24,17 +24,23 @@ def file(data):
     if "mode urgence" in data:
         emergency.process(data)
 
+    for string in ["traduis", "traduit", "traduire"]:
+        if string in data:
+            found_string = string
+        break
 
-    if "traduis" in data:
-        data = IO.treat_intent('traduis', data)
-        audio_ui.speak(trans.translate_data(data))
 
+    if not (found_string is None):
+        data = IO.treat_intent(found_string, data)
 
-
-    if "traduit" in data:
-        data = IO.treat_intent('traduit', data)
-        res = trans.translate_data(data)
-        audio_ui.speak(res, trans.tr(res))
+        if not (len(data) < 3):
+            try:
+                res = trans.translate_data(data)
+            except:
+                audio_ui.speak('désolé, je n''ai pas compris votre demande')
+            audio_ui.speak(res, trans.tr(res))
+        else:
+            audio_ui.speak("Que voulez vous que je traduise", 'fr')
 
 # initialization
 time.sleep(2)
