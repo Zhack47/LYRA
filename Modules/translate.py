@@ -7,7 +7,6 @@ translator = Translator()
 
 def tr(data):
     data = " ".join(data)
-    print(translator.detect(data).lang)
     return translator.detect(data).lang
 
 
@@ -30,5 +29,6 @@ def translate_data(data):
 def acknowledge_output_language(data):
     if "en" in data:
         data = IO.treat_intent('en', data)
+        print(data[0])
         return data[0]
     return 'fr'

@@ -22,7 +22,7 @@ def get_lang_symbol(i):
         'Anglais': 'en',
         'Espéranto': 'eo',
         'Estonien': 'et',
-        'Finnois': 'fi',
+        'Finlandais': 'fi',
         'Français': 'fr',
         'Frison': 'fy',
         'Galicien': 'gl',
